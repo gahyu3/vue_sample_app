@@ -11,7 +11,7 @@ class Api::TodosController < ApplicationController
     if todo.save
       render json: todo
     else
-      render json: { errors: todo.errors.full_messages }
+      render json: { errors: todo.errors.messages }
     end
   end
 
