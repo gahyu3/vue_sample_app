@@ -1,7 +1,7 @@
 <template>
   <h1>{{ title }}</h1>
   <div v-for="todo in todos.slice(start, end)" class="todo_marigin">
-    <v-card variant="tonal">
+    <v-card variant="tonal" hover :href="`http://localhost:3001/todos/${todo.id}`">
       <p>id; {{ todo.id }}</p>
       <p>to: {{ todo.to }}</p>
       <p>do: {{ todo.do }}</p>
