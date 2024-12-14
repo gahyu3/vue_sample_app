@@ -1,9 +1,11 @@
 <template>
   <h1>{{ title }}</h1>
-  <div v-for="todo in todos.slice(start, end)">
-    <p>id; {{ todo.id }}</p>
-    <p>to: {{ todo.to }}</p>
-    <p>do: {{ todo.do }}</p>
+  <div v-for="todo in todos.slice(start, end)" class="todo_marigin">
+    <v-card variant="tonal">
+      <p>id; {{ todo.id }}</p>
+      <p>to: {{ todo.to }}</p>
+      <p>do: {{ todo.do }}</p>
+    </v-card>
   </div>
   <form @submit.prevent="postTodo">
     <v-text-field
@@ -19,7 +21,9 @@
     label="DO"
     max-errors="1"
     ></v-text-field>
-    <input type="submit" value="登録">
+    <v-btn>
+      <input type="submit" value="登録">
+    </v-btn>
   </form>
   <v-pagination
       v-model="currentPage"
@@ -34,7 +38,7 @@
   const todos = ref([])
   const newTodo = ref({ to:'', do:'' })
   const errorTodo = ref([])
-  const currentPage = ref(1)
+  const currentPage = ref(0)
   const perPage = ref(5);
   const pageCount = computed(() => Math.ceil(todos.value.length / perPage.value));
   const start = ref(0)
@@ -73,7 +77,7 @@ onMounted(todosData)
         console.log(postResponse.data.errors);
         errorTodo.value = postResponse.data.errors;
       } else {
-        todos.value.push(postResponse.data);
+        todos.value.unshift(postResponse.data);
         newTodo.value = { to: '', do: '' };
       };
     } catch (error) {
@@ -81,3 +85,9 @@ onMounted(todosData)
     };
   };
 </script>
+
+<style>
+.todo_marigin {
+  margin:20px 0 20px 0 ;
+}
+</style>
