@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   get '/api/test', to: 'application#test'
 
   namespace :api do
-    resources :todos, only: [:index, :create]
+    resources :todos, only: [:index, :create, :show]
   end
 
   # Defines the root path route ("/")

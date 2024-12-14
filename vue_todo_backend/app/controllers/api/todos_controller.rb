@@ -15,6 +15,11 @@ class Api::TodosController < ApplicationController
     end
   end
 
+  def show
+    todo = Todo.find(params[:id])
+    render json: todo
+  end
+
   private
 
   def post_params
